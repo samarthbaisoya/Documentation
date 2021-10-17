@@ -2,106 +2,104 @@
 
 **March 16, 2018**
 
-**Abstract:** The EOS.IO software introduces a new blockchain architecture designed to enable vertical and horizontal scaling of decentralized applications. This is achieved by creating an operating system-like construct upon which applications can be built. The software provides accounts, authentication, databases, asynchronous communication, and the scheduling of applications across many of CPU cores or clusters. The resulting technology is a blockchain architecture that may ultimately scale to millions of transactions per second, eliminates user fees, and allows for quick and easy deployment and maintenance of decentralized applications, in the context of a governed blockchain.
+**Abstract:** 
+EOS.IO सॉफ्टवेयर विकेंद्रीकृत अनुप्रयोगों के ऊर्ध्वाधर और क्षैतिज स्केलिंग को सक्षम करने के लिए डिज़ाइन किया गया एक नया ब्लॉकचेन आर्किटेक्चर पेश करता है। यह एक ऑपरेटिंग सिस्टम जैसा कंस्ट्रक्शन बनाकर हासिल किया जाता है, जिस पर एप्लिकेशन बनाए जा सकते हैं। सॉफ्टवेयर कई सीपीयू कोर या क्लस्टर में खातों, प्रमाणीकरण, डेटाबेस, अतुल्यकालिक संचार और अनुप्रयोगों के शेड्यूलिंग प्रदान करता है। परिणामी तकनीक एक ब्लॉकचेन आर्किटेक्चर है जो अंततः प्रति सेकंड लाखों लेनदेन के पैमाने पर हो सकती है, उपयोगकर्ता शुल्क को समाप्त करती है, और एक शासित ब्लॉकचेन के संदर्भ में विकेंद्रीकृत अनुप्रयोगों की त्वरित और आसान तैनाती और रखरखाव की अनुमति देती है।
 
-**PLEASE NOTE: CRYPTOGRAPHIC TOKENS REFERRED TO IN THIS WHITE PAPER REFER TO CRYPTOGRAPHIC TOKENS ON A LAUNCHED BLOCKCHAIN THAT ADOPTS THE EOS.IO SOFTWARE. THEY DO NOT REFER TO THE ERC-20 COMPATIBLE TOKENS BEING DISTRIBUTED ON THE ETHEREUM BLOCKCHAIN IN CONNECTION WITH THE EOS TOKEN DISTRIBUTION.**
+**कृपया ध्यान दें: इस श्वेत पत्र में उल्लिखित क्रिप्टोग्राफ़िक टोकन ईओएस.आईओ सॉफ़्टवेयर को अपनाने वाले लॉन्च किए गए ब्लॉकचैन पर क्रिप्टोग्राफ़िक टोकन को संदर्भित करते हैं। वे ईओएस टोकन वितरण के संबंध में एथेरियम ब्लॉकचैन पर वितरित किए जा रहे ईआरसी -20 संगत टोकन का उल्लेख नहीं करते हैं।**
 
 Copyright © 2018 block.one
 
-Without permission, anyone may use, reproduce or distribute any material in this white paper for non-commercial and educational use (i.e., other than for a fee or for commercial purposes) provided that the original source and the applicable copyright notice are cited.
+अनुमति के बिना, कोई भी इस श्वेत पत्र में किसी भी सामग्री का गैर-व्यावसायिक और शैक्षिक उपयोग (अर्थात शुल्क या व्यावसायिक उद्देश्यों के अलावा) के लिए उपयोग, पुनरुत्पादन या वितरण कर सकता है, बशर्ते कि मूल स्रोत और लागू कॉपीराइट नोटिस का हवाला दिया गया हो।
 
 
-**DISCLAIMER:** This EOS.IO Technical White Paper v2 is for information purposes only. block.one does not guarantee the accuracy of or the conclusions reached in this white paper, and this white paper is provided “as is”. block.one does not make and expressly disclaims all representations and warranties, express, implied, statutory or otherwise, whatsoever, including, but not limited to: (i) warranties of merchantability, fitness for a particular purpose, suitability, usage, title or noninfringement; (ii) that the contents of this white paper are free from error; and (iii) that such contents will not infringe third-party rights. block.one and its affiliates shall have no liability for damages of any kind arising out of the use, reference to, or reliance on this white paper or any of the content contained herein, even if advised of the possibility of such damages. In no event will block.one or its affiliates be liable to any person or entity for any damages, losses, liabilities, costs or expenses of any kind, whether direct or indirect, consequential, compensatory, incidental, actual, exemplary, punitive or special for the use of, reference to, or reliance on this white paper or any of the content contained herein, including, without limitation, any loss of business, revenues, profits, data, use, goodwill or other intangible losses.
-
+**अस्वीकरण:** यह EOS.IO तकनीकी श्वेत पत्र v2 केवल सूचना के उद्देश्य से है। खंड मैथा। कोई इस श्वेत पत्र की सटीकता या निष्कर्ष की गारंटी नहीं देता है, और यह श्वेत पत्र "जैसा है" प्रदान किया गया है। block.one सभी अभ्यावेदन और वारंटी, व्यक्त, निहित, वैधानिक या अन्यथा, जो भी हो, को स्पष्ट रूप से अस्वीकार नहीं करता है, लेकिन इन तक सीमित नहीं है: (i) व्यापारिकता की वारंटी, किसी विशेष उद्देश्य के लिए उपयुक्तता, उपयुक्तता, उपयोग, शीर्षक या गैर उल्लंघन; (ii) कि इस श्वेत पत्र की सामग्री त्रुटि से मुक्त है; और (iii) कि ऐसी सामग्री तीसरे पक्ष के अधिकारों का उल्लंघन नहीं करेगी। इस श्वेत पत्र या इसमें निहित किसी भी सामग्री के उपयोग, संदर्भ, या निर्भरता से उत्पन्न होने वाले किसी भी प्रकार के नुकसान के लिए block.one और उसके सहयोगियों का कोई दायित्व नहीं होगा, भले ही इस तरह के नुकसान की संभावना की सलाह दी गई हो। किसी भी घटना में अवरुद्ध नहीं होगा। एक या उसके सहयोगी किसी भी व्यक्ति या संस्था के लिए किसी भी प्रकार के नुकसान, हानि, देनदारियों, लागत या व्यय के लिए उत्तरदायी होंगे, चाहे प्रत्यक्ष या अप्रत्यक्ष, परिणामी, प्रतिपूरक, आकस्मिक, वास्तविक, अनुकरणीय, दंडात्मक या विशेष इस श्वेत पत्र या इसमें निहित किसी भी सामग्री के उपयोग, संदर्भ या निर्भरता के लिए, बिना किसी सीमा के, व्यापार, राजस्व, लाभ, डेटा, उपयोग, सद्भावना या अन्य अमूर्त हानियों के किसी भी नुकसान सहित।
 <!-- MarkdownTOC depth=4 autolink=true bracket=round list_bullets="-*+" -->
 
-- [Background](#background)
-- [Requirements for Blockchain Applications](#requirements-for-blockchain-applications)
-  * [Support Millions of Users](#support-millions-of-users)
-  * [Free Usage](#free-usage)
-  * [Easy Upgrades and Bug Recovery](#easy-upgrades-and-bug-recovery)
-  * [Low Latency](#low-latency)
-  * [Sequential Performance](#sequential-performance)
-  * [Parallel Performance](#parallel-performance)
-- [Consensus Algorithm \(BFT-DPOS\)](#consensus-algorithm-bft-dpos)
-  * [Transaction Confirmation](#transaction-confirmation)
-  * [Transaction as Proof of Stake \(TaPoS\)](#transaction-as-proof-of-stake-tapos)
-- [Accounts](#accounts)
-  * [Actions & Handlers](#actions--handlers)
-  * [Role Based Permission Management](#role-based-permission-management)
-    + [Named Permission Levels](#named-permission-levels)
-    + [Permission Mapping](#permission-mapping)
-    + [Evaluating Permissions](#evaluating-permissions)
-      - [Default Permission Groups](#default-permission-groups)
+- [पृष्ठभूमि](#background)
+- [ब्लॉकचैन अनुप्रयोगों के लिए आवश्यकताएँ](#requirements-for-blockchain-applications)
+  * [लाखों उपयोगकर्ताओं का समर्थन करें](#support-millions-of-users)
+  * [मुफ्त उपयोग](#free-usage)
+  * [आसान उन्नयन और बग रिकवरी](#easy-upgrades-and-bug-recovery)
+  * [कम विलंबता](#low-latency)
+  * [अनुक्रमिक प्रदर्शन](#sequential-performance)
+  * [समानांतर प्रदर्शन](#parallel-performance)
+- [आम सहमति एल्गोरिथम \(बीएफटी-डीपीओएस\)](#consensus-algorithm-bft-dpos)
+  * [लेन-देन की पुष्टिn](#transaction-confirmation)
+  * [हिस्सेदारी के सबूत के रूप में लेनदेन \(TaPoS\)](#transaction-as-proof-of-stake-tapos)
+- [हिसाब किताब](#accounts)
+  * [क्रियाएँ और हैंडलर](#actions--handlers)
+  * [भूमिका आधारित अनुमति प्रबंधन](#role-based-permission-management)
+    + [नामांकित अनुमति स्तर](#named-permission-levels)
+    + [अनुमति मानचित्रण](#permission-mapping)
+    + [अनुमतियों का मूल्यांकन](#evaluating-permissions)
+      - [डिफ़ॉल्ट अनुमति समूह](#default-permission-groups)
       - [Parallel Evaluation of Permissions](#parallel-evaluation-of-permissions)
-  * [Actions with Mandatory Delay](#actions-with-mandatory-delay)
-  * [Recovery from Stolen Keys](#recovery-from-stolen-keys)
-- [Deterministic Parallel Execution of Applications](#deterministic-parallel-execution-of-applications)
-  * [Minimizing Communication Latency](#minimizing-communication-latency)
-  * [Read-Only Action Handlers](#read-only-action-handlers)
-  * [Atomic Transactions with Multiple Accounts](#atomic-transactions-with-multiple-accounts)
-  * [Partial Evaluation of Blockchain State](#partial-evaluation-of-blockchain-state)
-  * [Subjective Best Effort Scheduling](#subjective-best-effort-scheduling)
-  * [Deferred Transactions](#deferred-transactions)
-  * [Context Free Actions](#context-free-actions)
-- [Token Model and Resource Usage](#token-model-and-resource-usage)
-  * [Objective and Subjective Measurements](#objective-and-subjective-measurements)
-  * [Receiver Pays](#receiver-pays)
-  * [Delegating Capacity](#delegating-capacity)
-  * [Separating Transaction costs from Token Value](#separating-transaction-costs-from-token-value)
-  * [State Storage Costs](#state-storage-costs)
-  * [Block Rewards](#block-rewards)
-  * [Worker Proposal System](#worker-proposal-system)
-- [Governance](#governance)
-  * [Freezing Accounts](#freezing-accounts)
-  * [Changing Account Code](#changing-account-code)
-  * [Constitution](#constitution)
-  * [Upgrading the Protocol & Constitution](#upgrading-the-protocol--constitution)
-    + [Emergency Changes](#emergency-changes)
-- [Scripts & Virtual Machines](#scripts--virtual-machines)
-  * [Schema Defined Actions](#schema-defined-actions)
-  * [Schema Defined Database](#schema-defined-database)
-  * [Generic Multi Index Database API](#generic-multi-index-database-api)
-  * [Separating Authentication from Application](#separating-authentication-from-application)
-- [Inter Blockchain Communication](#inter-blockchain-communication)
-  * [Merkle Proofs for Light Client Validation \(LCV\)](#merkle-proofs-for-light-client-validation-lcv)
-  * [Latency of Interchain Communication](#latency-of-interchain-communication)
-  * [Proof of Completeness](#proof-of-completeness)
-  * [Segregated Witness](#segregated-witness)
-- [Conclusion](#conclusion)
+  * [अनुमतियों का समानांतर मूल्यांकन](#actions-with-mandatory-delay)
+  * [चोरी की चाबियों से वसूली](#recovery-from-stolen-keys)
+- [अनुप्रयोगों का नियतात्मक समानांतर निष्पादन](#deterministic-parallel-execution-of-applications)
+  * [संचार विलंबता को कम करना](#minimizing-communication-latency)
+  * [रीड-ओनली एक्शन हैंडलर](#read-only-action-handlers)
+  * [एकाधिक खातों के साथ परमाणु लेनदेन](#atomic-transactions-with-multiple-accounts)
+  * [ब्लॉकचैन राज्य का आंशिक मूल्यांकन](#partial-evaluation-of-blockchain-state)
+  * [सब्जेक्टिव बेस्ट एफर्ट शेड्यूलिंग](#subjective-best-effort-scheduling)
+  * [आस्थगित लेनदेन](#deferred-transactions)
+  * [संदर्भ मुक्त क्रियाएं](#context-free-actions)
+- [टोकन मॉडल और संसाधन उपयोग](#token-model-and-resource-usage)
+  * [उद्देश्य और व्यक्तिपरक माप](#objective-and-subjective-measurements)
+  * [रिसीवर भुगतान करता है](#receiver-pays)
+  * [प्रत्यायोजन क्षमता](#delegating-capacity)
+  * [लेनदेन लागत को टोकन मूल्य से अलग करना](#separating-transaction-costs-from-token-value)
+  * [राज्य भंडारण लागत](#state-storage-costs)
+  * [ब्लॉक पुरस्कार](#block-rewards)
+  * [कार्यकर्ता प्रस्ताव प्रणाली](#worker-proposal-system)
+- [शासन](#governance)
+  * [फ्रीजिंग खाते](#freezing-accounts)
+  * [खाता कोड बदलना](#changing-account-code)
+  * [संविधान](#constitution)
+  * [प्रोटोकॉल और संविधान का उन्नयन](#upgrading-the-protocol--constitution)
+    + [आपातकालीन परिवर्तन](#emergency-changes)
+- [स्क्रिप्ट और वर्चुअल मशीन](#scripts--virtual-machines)
+  * [स्कीमा परिभाषित क्रियाएं](#schema-defined-actions)
+  * [स्कीमा परिभाषित डेटाबेस](#schema-defined-database)
+  * [जेनेरिक मल्टी इंडेक्स डेटाबेस एपीआई](#generic-multi-index-database-api)
+  * [आवेदन से प्रमाणीकरण को अलग करना](#separating-authentication-from-application)
+- [इंटर ब्लॉकचैन संचार](#inter-blockchain-communication)
+  * [लाइट क्लाइंट सत्यापन के लिए मर्कल प्रूफ \(LCV\)](#merkle-proofs-for-light-client-validation-lcv)
+  * [इंटरचेन संचार की विलंबता](#latency-of-interchain-communication)
+  * [पूर्णता का प्रमाण](#proof-of-completeness)
+  * [अलग गवाह](#segregated-witness)
+- [निष्कर्ष](#conclusion)
 
 <!-- /MarkdownTOC -->
 
-# Background
+# पृष्ठभूमि
 
-Blockchain technology was introduced in 2008 with the launch of the Bitcoin currency, and since then entrepreneurs and developers have attempted to generalize the technology to support a wider range of applications on a single blockchain platform.
+ब्लॉकचैन तकनीक को 2008 में बिटकॉइन मुद्रा के लॉन्च के साथ पेश किया गया था, और तब से उद्यमियों और डेवलपर्स ने एकल ब्लॉकचैन प्लेटफॉर्म पर व्यापक श्रेणी के अनुप्रयोगों का समर्थन करने के लिए प्रौद्योगिकी को सामान्य बनाने का प्रयास किया है।
 
-While a number of blockchain platforms have struggled to support functional decentralized applications, application specific blockchains such as the BitShares decentralized exchange (2014) and Steem social media platform (2016) have become heavily used blockchains with tens of thousands of daily active users. They have achieved this by increasing performance to thousands of transactions per second, reducing latency to 1.5 seconds, eliminating per-transaction fees, and providing a user experience similar to those currently provided by existing centralized services.
+जबकि कई ब्लॉकचैन प्लेटफॉर्म कार्यात्मक विकेन्द्रीकृत अनुप्रयोगों का समर्थन करने के लिए संघर्ष कर रहे हैं, बिटशर्स विकेन्द्रीकृत एक्सचेंज (2014) और स्टीम सोशल मीडिया प्लेटफॉर्म (2016) जैसे एप्लिकेशन विशिष्ट ब्लॉकचेन हजारों दैनिक सक्रिय उपयोगकर्ताओं के साथ भारी उपयोग किए जाने वाले ब्लॉकचैन बन गए हैं। उन्होंने प्रति सेकंड हजारों लेन-देन के प्रदर्शन को बढ़ाकर, 1.5 सेकंड के लिए विलंबता को कम करके, प्रति-लेनदेन शुल्क को समाप्त करके, और मौजूदा केंद्रीकृत सेवाओं द्वारा वर्तमान में प्रदान किए जाने वाले उपयोगकर्ता अनुभव प्रदान करके इसे हासिल किया है।
 
-Existing blockchain platforms are burdened by large fees and limited computational capacity that prevent widespread blockchain adoption.
+मौजूदा ब्लॉकचेन प्लेटफॉर्म पर बड़ी फीस और सीमित कम्प्यूटेशनल क्षमता का बोझ है जो व्यापक ब्लॉकचेन अपनाने को रोकता है।
 
-# Requirements for Blockchain Applications
+#ब्लॉकचैन अनुप्रयोगों के लिए आवश्यकताएँ
 
-In order to gain widespread use, applications on the blockchain require a platform that is flexible enough to meet the following requirements:
+व्यापक उपयोग प्राप्त करने के लिए, ब्लॉकचैन पर अनुप्रयोगों को एक ऐसे प्लेटफॉर्म की आवश्यकता होती है जो निम्नलिखित आवश्यकताओं को पूरा करने के लिए पर्याप्त लचीला हो:
 
-## Support Millions of Users
+## लाखों उपयोगकर्ताओं का समर्थन करें
 
-Competing with businesses such as eBay, Uber, AirBnB, and Facebook, require blockchain technology capable of handling tens of millions of active daily users. In certain cases, an application may not work unless a critical mass of users is reached and therefore a platform that can handle very large numbers of users is paramount.
+ईबे, उबेर, एयरबीएनबी और फेसबुक जैसे व्यवसायों के साथ प्रतिस्पर्धा करने के लिए लाखों सक्रिय दैनिक उपयोगकर्ताओं को संभालने में सक्षम ब्लॉकचेन तकनीक की आवश्यकता होती है। कुछ मामलों में, एक एप्लिकेशन तब तक काम नहीं कर सकता जब तक कि उपयोगकर्ताओं के एक महत्वपूर्ण समूह तक नहीं पहुंच जाता है और इसलिए एक ऐसा प्लेटफॉर्म जो बहुत बड़ी संख्या में उपयोगकर्ताओं को संभाल सकता है, सर्वोपरि है।
 
-## Free Usage
+## मुफ्त उपयोग
 
-Application developers need the flexibility to offer users free services; users should not have to pay in order to use the platform or benefit from its services. A blockchain platform that is free to use for users will likely gain more widespread adoption. Developers and businesses can then create effective monetization strategies.
+एप्लिकेशन डेवलपर्स को उपयोगकर्ताओं को निःशुल्क सेवाएं प्रदान करने के लिए लचीलेपन की आवश्यकता होती है; उपयोगकर्ताओं को प्लेटफ़ॉर्म का उपयोग करने या इसकी सेवाओं से लाभ उठाने के लिए भुगतान नहीं करना चाहिए। एक ब्लॉकचेन प्लेटफॉर्म जो उपयोगकर्ताओं के लिए उपयोग करने के लिए स्वतंत्र है, संभवतः अधिक व्यापक रूप से अपनाए जाने की संभावना है। तब डेवलपर और व्यवसाय प्रभावी मुद्रीकरण रणनीतियां बना सकते हैं।
 
-## Easy Upgrades and Bug Recovery
+## आसान उन्नयन और बग रिकवरी
 
-Businesses building blockchain based applications need the flexibility to enhance their applications with new features. The platform must support software and smart contract upgrades.
+ब्लॉकचेन-आधारित एप्लिकेशन बनाने वाले व्यवसायों को नई सुविधाओं के साथ अपने एप्लिकेशन को बढ़ाने के लिए लचीलेपन की आवश्यकता होती है। प्लेटफॉर्म को सॉफ्टवेयर और स्मार्ट कॉन्ट्रैक्ट अपग्रेड का समर्थन करना चाहिए।
 
-All non-trivial software is subject to bugs, even with the most rigorous of formal verification. The platform must be robust enough to fix bugs when they inevitably occur.
+सभी गैर-तुच्छ सॉफ़्टवेयर बग के अधीन हैं, यहां तक कि सबसे कठोर औपचारिक सत्यापन के साथ भी। जब वे अनिवार्य रूप से होते हैं तो बग को ठीक करने के लिए प्लेटफ़ॉर्म पर्याप्त रूप से मजबूत होना चाहिए।
 
-## Low Latency
-
-A good user experience demands reliable feedback with a delay of no more than a few seconds. Longer delays frustrate users and make applications built on a blockchain less competitive with existing non-blockchain alternatives. The platform should support low latency of transactions.
-
+## कम विलंबता
+एक अच्छा उपयोगकर्ता अनुभव कुछ सेकंड से अधिक की देरी के साथ विश्वसनीय प्रतिक्रिया की मांग करता है। लंबे समय तक देरी उपयोगकर्ताओं को निराश करती है और मौजूदा गैर-ब्लॉकचेन विकल्पों के साथ ब्लॉकचैन पर बनाए गए अनुप्रयोगों को कम प्रतिस्पर्धी बनाती है। मंच को लेनदेन की कम विलंबता का समर्थन करना चाहिए।
 ## Sequential Performance
 
 There are some applications that just cannot be implemented with parallel algorithms due to sequentially dependent steps. Applications such as exchanges need enough sequential performance to handle high volumes. Therefore, the platform should support fast sequential performance.
